@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tişört Sipariş</title>
+    <style>
+        label {
+            display: inline-block;
+            width: 130px;
+            margin-bottom: 5px;
+        }
+        .labelsiparis{
+            width: 240px;
+        }
+        .labelodeme{
+            width: 150px;
+        }
+        .form-center {
+            display:flex;
+            justify-content: center;
+        }
+        table,th,td {
+        border: 1px solid black;
+        background-color: #F6F9C7;
+      }
+      
+       
+
+    </style>
+</head>
+<body>
+    <div class="form-center">
+    <form method="POST" action="#">
+        <h1>Kişiye Özel Tişört Sipariş Aracı</h1>
+        <hr>
+        <p>Lütfen oluşturmak istediğiniz siparile ilişkin aşağıdaki bilgileri doldurunuz ;</p>
+        <h3>Kişisel Bilgiler</h3>
+        <label for="adi">Adınız : </label>
+        <input type="text" id="adi"><br>
+        <label for="soyadi">Soyadınız : </label>
+        <input type="text" id="soyadi"><br>
+        <label for="dogum">Doğum Tarihiniz : </label>
+        <input type="date" id="dogum"><br>
+        <label for="email">Mail Adresiniz : </label>
+        <input type="email" id="email"><br>
+        <label for="tel">Telefon : </label>
+        <input type="tel" id="tel" placeholder="5XX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br><br>
+        <hr>
+        <h3>Sipariş Bilgileri</h3>
+        <label for="tRenk" class="labelsiparis">Tişört Rengi : </label>
+        <input type="color" id="tRenk"><br>
+        <label for="yRenk" class="labelsiparis">Yazı Rengi : </label>
+        <input type="color" id="yRenk"><br>
+        <label for="tYazi" class="labelsiparis">Tişört üzerinde yazacak yazıyı girin :</label>
+        <input type="text" id="tYazi"><br>
+        <label for="tAdet" class="labelsiparis">Tişört Adeti :</label>
+        <input type="number" id="tAdet"><br><br>
+        <label for="beden" class="labelsiparis">Beden Seçiniz :</label>
+        <input type="range" id="beden" name="beden" list="markers" min="0" max="5" /><br>
+
+        <datalist id="markers">
+            <option value="0">XS</option>
+            <option value="1">S</option>
+            <option value="2">M</option>
+            <option value="3">L</option>
+            <option value="4">XL</option>
+            <option value="5">XXL</option>
+        </datalist>
+        <br>
+        <button onclick="bedensec(event)" id="sec">Seç</button>
+        <input type="text" id="secInput">
+        <hr>
+        <br>
+        
+        <h3>Teslimat Bilgileri</h3>
+        <label for="adres" class="labelsiparis">Adres : </label>
+        <textarea id="adres" rows="1" style="width: 220px;"></textarea><br>
+        <label for="teslimtarihi" class="labelsiparis">Teslim tarihi için bir aralık seçiniz : </label>
+        <input type="week" id="teslimtarihi"><br>
+        <hr>
+        <h3>Ödeme Bilgileri</h3>
+        <label for="adSoyad" class="labelodeme">Ad Soyad : </label>
+        <input type="text" id="adSoyad"><br>
+        <label for="kartno" class="labelodeme">Kart Numarası : </label>
+        <input type="number" id="kartno" placeholder="XXXX-XXXX-XXXX-XXXX" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}"><br>
+        <label for="skt" class="labelodeme">Son Kullanma Tarihi :</label>
+        <input type="month" id="skt"><br>
+        <label for="cvv" class="labelodeme">CVV :</label>
+        <input type="number" id="cvv" style="width: 60px;"><br><br>
+        <input type="button" onclick="ShowData(event)" value="Onayla">
+
+
+    </form>
+    </div>
+    <br>
+    <br>
+    <div class="form-center" style="margin-top: 5rem;">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="3">SİPARİŞ ONAY</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="5" style=" text-align: center; vertical-align: middle; font-weight: bold;">KİŞİSEL BİLGİLER</td>
+                    <td> Ad:</td>
+                    <td><input id="nameRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td>Soyad:</td>
+                    <td><input id="surnameRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td>Doğum Tarihi:</td>
+                    <td><input id="birthdayRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td>Mail Adresi:</td>
+                    <td><input id="emailRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td>Telefon:</td>
+                    <td><input id="phoneRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td rowspan="5" style=" text-align: center; vertical-align: middle; font-weight: bold;">SİPARİŞ BİLGİLERİ</td>
+                    <td> Tişört rengi:</td>
+                    <td><input id="thsirtcolorRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td>Yazı Rengi:</td>
+                    <td><input id="writingcolorRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td>Yazı:</td>
+                    <td><input id="writingRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td>Tişört Adeti:</td>
+                    <td><input id="tshirtCountRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td>Tişört Bedeni:</td>
+                    <td><input id="tshirtSizeRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" style=" text-align: center; vertical-align: middle; font-weight: bold;">TESLİMAT BİLGİLERİ</td>
+                    <td> Adres:</td>
+                    <td><input id="addressRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td>Teslim Tarihi:</td>
+                    <td><input id="duedateRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td rowspan="4" style=" text-align: center; vertical-align: middle; font-weight: bold;">ÖDEME BİLGİLERİ</td>
+                    <td> Ad Soyad:</td>
+                    <td><input id="fullnameRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td>Kart Numarası:</td>
+                    <td><input id="cardNumberRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td>Son Kullanma Tarihi:</td>
+                    <td><input id="expireDateRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+                <tr>
+                    <td>CVV:</td>
+                    <td><input id="cvvRow" style="width: 97%" type="text" disabled/></td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>      
+    </div>
+    <br>
+    <div class="form-center"><button>Tamamla</button></div>
+    
+    
+
+
+        <script>
+            function bedensec(event){
+                event.preventDefault();
+                let beden = document.getElementById("beden").value;
+                let datalist = document.getElementById("markers");
+                let secilibeden = datalist.querySelector(`option[value="${beden}"]`).textContent;
+                document.getElementById("secInput").value = secilibeden;
+            };
+            
+            function ShowData() {
+            event.preventDefault();
+            let name = document.getElementById("adi").value;
+            let surname = document.getElementById("soyadi").value;
+            let birthday = document.getElementById("dogum").value;
+            let email = document.getElementById("email").value;
+            let phone = document.getElementById("tel").value;
+            let tshirtcolor = document.getElementById("tRenk").value;
+            let writingcolor = document.getElementById("yRenk").value;
+            let writing = document.getElementById("tYazi").value;
+            let tshirtCount = document.getElementById("tAdet").value;
+            let tshirtSize = document.getElementById("beden").value;
+            let adress = document.getElementById("adres").value;
+            let duedate = document.getElementById("teslimtarihi").value;
+            let fullname = document.getElementById("adSoyad").value;
+            let cardNumber = document.getElementById("kartno").value;
+            let expireDate = document.getElementById("skt").value;
+            let cvv = document.getElementById("cvv").value;
+
+           document.getElementById("nameRow").value = name;
+           document.getElementById("surnameRow").value = surname;
+           document.getElementById("birthdayRow").value = birthday;
+           document.getElementById("emailRow").value = email;
+           document.getElementById("phoneRow").value = phone;
+           document.getElementById("thsirtcolorRow").value = tshirtcolor;
+           document.getElementById("writingcolorRow").value = writingcolor;
+           document.getElementById("writingRow").value = writing;
+           document.getElementById("tshirtCountRow").value = tshirtCount;
+           document.getElementById("tshirtSizeRow").value = tshirtSize;
+           
+           let beden = document.getElementById("beden").value;
+            let datalist = document.getElementById("markers");
+            let secilibeden = datalist.querySelector(`option[value="${beden}"]`).textContent;
+           document.getElementById("tshirtSizeRow").value = secilibeden;
+
+           document.getElementById("addressRow").value = adress;
+           document.getElementById("duedateRow").value = duedate;
+           document.getElementById("fullnameRow").value = fullname;
+           document.getElementById("cardNumberRow").value = cardNumber;
+           document.getElementById("expireDateRow").value = expireDate;
+           document.getElementById("cvvRow").value = cvv;
+        }
+        </script>
+
+</body>
+</html>
